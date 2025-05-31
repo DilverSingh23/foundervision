@@ -1,10 +1,17 @@
 import Navbar from "@/components/navbar";
 import MainButton from "@/components/mainbutton";
 import {useState, useEffect} from "react";
+import { useRouter } from "next/router";
+import ChatbotDashboard from "./chatbotdashboard";
 
 
 export default function Home() {
+  const router = useRouter()
   const [isLoaded, setIsLoaded] = useState(false)
+
+  const handleOnClick = () => {
+    router.push('/chatbotdashboard');
+  }
 
   useEffect( () =>{
     setIsLoaded(true)
@@ -27,7 +34,7 @@ export default function Home() {
             <p className="text-gray-300 font-light text-s s:text-s md:text-base lg:text-xl w-85 xs:w-95 sm:w-150 md:w-2xl lg:w-4xl">
             FounderVision analyzes your startup idea and instantly generates a structured business canvas, 
             powered by AI insights, to help you build faster and smarter.</p>
-            <MainButton name="Launch Your Idea" />
+            <MainButton name="Launch Your Idea" onClick={handleOnClick} />
           </div>
         </div>
       </div>
