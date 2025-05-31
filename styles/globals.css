@@ -3,10 +3,11 @@
 
 @theme {
   --font-inter: "Inter", sans-serif;
+  --breakpoint-xs: 25rem;
 }
 
 body {
-  background-color: black;
+  background-color: #0D1117;
 }
 
 .red-gradient {
