@@ -4,6 +4,12 @@
 @theme {
   --font-inter: "Inter", sans-serif;
   --breakpoint-xs: 25rem;
+  --breakpoint-1_5xl: 1300px;
+  --breakpoint-mm: 610px;
+  --breakpoint-ss: 500px;
+  --breakpoint-xss: 460px;
+  --breakpoint-2xs: 415px;
+  --breakpoint-3xl: 1900px;
 }
 
 body {
