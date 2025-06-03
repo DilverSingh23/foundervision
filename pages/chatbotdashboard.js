@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FaHome, FaPlus, FaMap, FaQuestionCircle } from "react-icons/fa";
 import { IoRocketSharp } from "react-icons/io5";
+import ChatDisplay from "../components/chatdisplay";
 
 export default function ChatbotDashboard() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [userInput, setUserInput] = useState('');
+    const [submittedInput, setSubmittedInput] = useState('');
+    const [inputField, setInputField] = useState(true);
     const router = useRouter();
     const backToHome = () => {
         router.push("/");
@@ -15,8 +18,10 @@ export default function ChatbotDashboard() {
         e.preventDefault()
         if (userInput.trim() == "") {
             alert("You can't submit an empty idea!")
+            return
         }
-        console.log(userInput)
+        setSubmittedInput(userInput)
+        setInputField(false)
         setUserInput("")
     }
 
@@ -65,21 +70,24 @@ export default function ChatbotDashboard() {
                             <img src="founderai.png" className="w-25 h-25"/>
                             <h2 className="">FounderAI</h2>
                         </div>
-                        <div className="flex justify-center w-full mb-5">
-                            <form onSubmit={handleUserInput} className="flex border-2 border-red-400 gap-2 rounded-3xl p-3 items-center">
-                                <textarea 
-                                    rows = {4}
-                                    className="text-white w-150 h-20 focus:outline-none focus:ring-0 resize-none font-inter font-light" 
-                                    placeholder="What is your business idea?"
-                                    value = {userInput}
-                                    onChange={e => setUserInput(e.target.value)}
-                                    onKeyDown={handleKeyDown}
-                                />
-                                <button type="submit" className="bg-red-500 hover:bg-red-400 cursor-pointer text-white p-3 rounded-3xl h-10 self-end">
-                                    <IoRocketSharp className="text-white" />
-                                </button>
-                            </form>
-                        </div>
+                        <ChatDisplay userInput={submittedInput} />
+                        {inputField && (
+                            <div className="flex justify-center w-full mb-5">
+                                <form onSubmit={handleUserInput} className="flex border-2 border-red-400 gap-2 rounded-3xl p-3 items-center">
+                                    <textarea 
+                                        rows = {4}
+                                        className="text-white w-180 h-20 focus:outline-none focus:ring-0 resize-none font-inter font-light" 
+                                        placeholder="What is your business idea?"
+                                        value = { userInput }
+                                        onChange={e => setUserInput(e.target.value)}
+                                        onKeyDown={handleKeyDown}
+                                    />
+                                    <button type="submit" className="bg-red-500 hover:bg-red-400 cursor-pointer text-white p-3 rounded-3xl h-10 self-end">
+                                        <IoRocketSharp className="text-white" />
+                                    </button>
+                                </form>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
