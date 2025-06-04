@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import UserMessage from "./usermessage";
 import AiMessage from "./aimessage";
 const chatdisplay = ({ userInput  }) => {
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
     useEffect(() => {
         if (userInput.length > 0) {
             setTimeout(() => {
@@ -12,7 +12,7 @@ const chatdisplay = ({ userInput  }) => {
         }
     }, [userInput])
     const startMessage = "Hey, I'm FounderAI🚀! Input your business idea in as much detail as possible and I will help you generate it into reality!";
-    const endMessage = "Got it! Let me create a business canvas based on your idea."
+    const endMessage = "Got it! I'm generating a business canvas based on your idea🎨."
 
     return (
         <div className="flex flex-col w-200 h-full gap-10 self-center mt-10">
