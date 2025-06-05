@@ -27,6 +27,10 @@ body {
   background-image: url(../public/chatbotbg.png);
 }
 
+.wrap {
+  overflow-wrap: break-word;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
