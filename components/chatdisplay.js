@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import UserMessage from "./usermessage";
 import AiMessage from "./aimessage";
+import Typing from "./typing";
+
 const chatdisplay = ({ userInput  }) => {
     const [show, setShow] = useState(false);
-    const [mostRecentMessage, setMostRecentMessage] = useState("")
     const startMessage = "Hey, I'm FounderAI🚀! Input your business idea in as much detail as possible and I will help you generate it into reality!";
     const endMessage = "Got it! I'm generating a business canvas based on your idea🎨."
     const bottomOfChat = useRef(null)
@@ -12,7 +13,7 @@ const chatdisplay = ({ userInput  }) => {
         if (userInput.length > 0) {
             setTimeout(() => {
                 setShow(true)
-            }, 1000)
+            }, 1500)
             clearTimeout()
         }
     }, [userInput])
@@ -30,8 +31,12 @@ const chatdisplay = ({ userInput  }) => {
                 <>
                     <UserMessage message={userInput} />
                     {show && (
-                        <AiMessage id="final" output={endMessage} className="opacity-0 transition-opacity duration-1000" />
+                        <AiMessage output={endMessage} className="opacity-0 transition-opacity duration-1000" />
                     )}
+                    <div className="flex items-center">
+                        <img src="/founderai.png" className="w-25 h-25 self-center"/>
+                        <Typing className="" />
+                    </div>
                 </>
             )}
             <div ref={bottomOfChat} />

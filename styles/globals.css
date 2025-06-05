@@ -13,6 +13,31 @@
   --breakpoint-xss: 460px;
   --breakpoint-2xs: 415px;
   --breakpoint-3xl: 1900px;
+  --animate-typing: loadingFade 1s infinite;
+}
+
+@keyframes loadingFade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.dot-1 {
+  animation-delay: 0s;
+}
+
+.dot-2 {
+  animation-delay: 0.2s;
+}
+
+.dot-3 {
+  animation-delay: 0.4s;
 }
 
 body {
