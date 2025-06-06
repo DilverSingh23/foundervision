@@ -1,12 +1,12 @@
 import React from 'react';
 
-const BusinessCanvas = ({ canvasData, onDownloadPDF }) => {
+const BusinessCanvas = ({ canvasData }) => {
   if (!canvasData) return null;
 
   return (
     <div className="w-full max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6 text-black">
       <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
-        Business Model Canvas
+        {canvasData.businessTitle}
       </h2>
       
       
@@ -44,8 +44,9 @@ const BusinessCanvas = ({ canvasData, onDownloadPDF }) => {
           <p className="text-sm text-gray-700">{canvasData.keyResources}</p>
         </div>
         
-        <div className="bg-gray-50 p-4 rounded-lg border-2 border-gray-200">
-          
+        <div className=" flex justify-center items-center gap-1.5 md:gap-2.5  bg-red-400 p-4 rounded-lg border-2 border-gray-200">
+          <img src = "/foundervision-logo.png" alt="FounderVision" className='w-10 m:w-25'></img>
+          <h1 className='text-white  mt-3 md:mt-2 font-inter font-extrabold text-s md:text-xl'>FounderVision</h1>
         </div>
         
         <div className="bg-teal-50 p-4 rounded-lg border-2 border-teal-200">
@@ -68,14 +69,14 @@ const BusinessCanvas = ({ canvasData, onDownloadPDF }) => {
       </div>
       
       
-      <div className="flex justify-center mt-6">
+      {/* <div className="flex justify-center mt-6">
         <button 
           onClick={onDownloadPDF}
           className="bg-gradient-to-r from-rose-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-bold py-3 px-6 rounded-full transition-all duration-300"
         >
           Download PDF Canvas
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

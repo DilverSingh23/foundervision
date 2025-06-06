@@ -5,9 +5,9 @@ export default async function handler(req,res) {
         return res.status(405).json({error: 'Method not allowed' });
     }
     try {
-        const businessIdea = req.body;
+        const { businessIdea } = req.body;
 
-        if (!businessIdea || businessIdea.trim() == '') {
+        if (!businessIdea || String(businessIdea).trim() == '') {
             return res.status(400).json({error: 'Business idea is required'});
         }
 
