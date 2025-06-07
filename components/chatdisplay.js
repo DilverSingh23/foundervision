@@ -1,10 +1,13 @@
+'use client' 
 import React, { useEffect, useState, useRef } from "react";
 import UserMessage from "./usermessage";
 import AiMessage from "./aimessage";
 import Typing from "./typing";
 import BusinessCanvas from "./businesscanvas";
 import MainButton from "./mainbutton";
-import { IoIosCloseCircle } from "react-icons/io";
+import { IoIosCloseCircle, IoIosDownload } from "react-icons/io";
+import html2canvas from "html2canvas-pro";
+import jsPDF from "jspdf";
 
 const chatdisplay = ({ userInput }) => {
     const [show, setShow] = useState(false);
@@ -16,6 +19,7 @@ const chatdisplay = ({ userInput }) => {
     const generatingMessage = "Got it! I'm generating a business canvas based on your idea 🎨.";
     const completionMessage = "Done ✅! Click the download button at the bottom to download your business canvas. Good luck with your startup journey and create a new chat if you want to generate another!"
     const bottomOfChat = useRef(null);
+    const canvas = useRef(null);
 
     useEffect(() => {
         if (userInput.length > 0) {
@@ -61,16 +65,34 @@ const chatdisplay = ({ userInput }) => {
 
     }
 
+    const handleDownload = async() => {
+        const element = canvas.current
+        if (!element) return
+        const originalWidth = element.style.width
+        element.style.width = "1200px"
+        const screenshot = await html2canvas(element)
+        const image = screenshot.toDataURL("image/png", 1.0)
+        const pdf = new jsPDF({
+            orientation: "landscape",
+            unit: "px",
+            format: [screenshot.width, screenshot.height]
+        })
+        pdf.addImage(image, "PNG", 0, 0, screenshot.width, screenshot.height)
+        pdf.save(`${canvasData.businessTitle || "your"}-canvas.pdf`)
+        element.style.width = originalWidth
+    }
+
     const viewingCanvas = () => {
-        setViewing(true);
+        setViewing(true)
     }
 
     const notViewingCanvas = () => {
-        setViewing(false);
+        setViewing(false)
     }
 
+
     return (
-        <div className="flex flex-col w-250 h-11/12 self-center overflow-auto mt-5 scroll-behavior-smooth scrollbar-gutter-stable p-10 pt-0 overflow-x-hidden gap-10 ">
+        <div className="flex flex-col w-250 h-11/12 self-center overflow-auto mt-5 scroll-behavior-smooth scrollbar-gutter-stable p-10 pt-0 overflow-x-scroll gap-10">
             <AiMessage output = {startMessage} first={true} />
             {userInput.length > 0 && (
                 <>
@@ -93,27 +115,33 @@ const chatdisplay = ({ userInput }) => {
                     {canvasData && !viewing && (
                         <>
                             <div className="relative w-fit bg-cover bg-no-repeat rounded-4xl ml-25" style={{backgroundImage: "url('/canvas-skeleton.png')"}}>
-                                <img src="/canvas-skeleton.png" alt="canvas" className="h-115 w-95 ml-25 opacity-0 "/>
+                                <img src="/canvas-skeleton.png" alt="canvas" className="h-115 w-95 ml-25 opacity-0"/>
                                 <div className="absolute inset-0 bg-black opacity-20 left-0" />
                                 <h1 className="text-white font-inter font-extrabold w-100 text-center absolute text-xl left-10 bottom-80 border-4 border-red-500 bg-black rounded-4xl p-5 ">
                                         {canvasData.businessTitle}
                                 </h1>
                                 <div className="flex flex-col gap-5 absolute left-35 bottom-35 ">
-                                    <MainButton name="View" onClick={viewingCanvas} />
-                                    <MainButton name="Download" onClick={null}/>
+                                    <MainButton name="View/Download" onClick={viewingCanvas} />
                                 </div>
                             </div>
                             <AiMessage output={completionMessage} first={true}/>
                         </>
                     )}
                     {viewing && (
-                        <div className=" relative w-full h-full">
-                            <BusinessCanvas canvasData={canvasData}/>
-                            <button onClick={notViewingCanvas}>
-                                <div className="flex absolute top-2 right-2 items-center gap-2 w-fit h-fit text-white text-lg cursor-pointer bg-black font-extralight rounded-4xl p-4">
-                                    <IoIosCloseCircle className="bg-white rounded-4xl text-2xl text-red-500" /> Close Canvas
-                                </div>
-                            </button>
+                        <div className="w-full h-full">
+                            <div ref={canvas}>
+                                <BusinessCanvas canvasData={canvasData}/>
+                            </div>
+                            <div className="flex items-center gap-1 w-fit h-fit text-white text-lg cursor-pointer font-extralight mb-5 mt-3 ml-5 ">
+                                <button className="flex gap-3 items-center bg-white rounded-4xl p-3 cursor-pointer  hover:bg-gray-200" onClick={notViewingCanvas}>
+                                    <IoIosCloseCircle className="rounded-4xl text-2xl text-red-500" onClick={notViewingCanvas}/>
+                                    <h1 className="text-black">Close Canvas</h1>
+                                </button>
+                                <button className="flex gap-3 items-center bg-white rounded-4xl p-3 cursor-pointer hover:bg-gray-200" onClick={handleDownload}>
+                                    <IoIosDownload className="rounded-4xl text-2xl text-red-500" /> 
+                                    <h1 className="text-black">Download</h1>
+                                </button>
+                            </div>
                             <AiMessage output={completionMessage} first={true}/>
                         </div> 
                     )}

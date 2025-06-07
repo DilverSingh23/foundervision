@@ -10,7 +10,7 @@ const BusinessCanvas = ({ canvasData }) => {
       </h2>
       
       
-      <div className="grid grid-cols-5 gap-4 mb-4">
+      <div className="grid grid-cols-3 gap-4 mb-4">
         <div className="bg-red-50 p-4 rounded-lg border-2 border-red-200">
           <h3 className="font-bold text-red-700 mb-2">Key Partners</h3>
           <p className="text-sm text-gray-700">{canvasData.keyPartners}</p>
@@ -25,7 +25,9 @@ const BusinessCanvas = ({ canvasData }) => {
           <h3 className="font-bold text-blue-700 mb-2">Value Propositions</h3>
           <p className="text-sm text-gray-700">{canvasData.valuePropositions}</p>
         </div>
-        
+      </div>
+
+      <div className='grid grid-cols-2 gap-4 mb-4'>
         <div className="bg-green-50 p-4 rounded-lg border-2 border-green-200">
           <h3 className="font-bold text-green-700 mb-2">Customer Relationships</h3>
           <p className="text-sm text-gray-700">{canvasData.customerRelationships}</p>

@@ -38,7 +38,7 @@ export default function ChatbotDashboard() {
         <section className="justify-center w-screen h-screen overflow-x-hidden">
             <div className="flex flex-row justify-center">
                 <div className="flex ml-10 gap-10 flex-col justify-center items-center bg-black h-screen w-screen p-5 cursor-pointer">
-                    <img src="foundervision-logo.png" className="w-10" onClick={backToHome} />
+                    <img src="foundervision-logo.png" className="w-[16px] h-[16px]" onClick={backToHome} />
                     <FaMap className="text-red-500" />
                     <FaQuestionCircle className="text-red-500" />
                 </div>
