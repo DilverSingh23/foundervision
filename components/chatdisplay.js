@@ -9,7 +9,7 @@ import { IoIosCloseCircle, IoIosDownload } from "react-icons/io";
 import html2canvas from "html2canvas-pro";
 import jsPDF from "jspdf";
 
-const chatdisplay = ({ userInput }) => {
+const chatdisplay = ({ userInput, onSaveChat, currentChatData }) => {
     const [show, setShow] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false);
     const [canvasData, setCanvasData] = useState(null);
@@ -18,24 +18,40 @@ const chatdisplay = ({ userInput }) => {
     const startMessage = "Hey, I'm FounderAI🚀! Input your business idea in as much detail as possible and I will help you generate it into reality!";
     const generatingMessage = "Got it! I'm generating a business canvas based on your idea 🎨.";
     const completionMessage = "Done ✅! Click the download button at the bottom to download your business canvas. Good luck with your startup journey and create a new chat if you want to generate another!"
+    const userInputDisplay = currentChatData ? currentChatData.userIdea : userInput 
     const bottomOfChat = useRef(null);
     const canvas = useRef(null);
 
     useEffect(() => {
-        if (userInput.length > 0) {
+        if (currentChatData) {
+            setCanvasData(currentChatData.canvasData)
+            setShow(true)
+        }
+        else {
+            setCanvasData(null)
+            setShow(false)
+            setError("")
+            setViewing(false)
+        }
+    }, [currentChatData])
+
+    useEffect(() => {
+        if (!currentChatData && userInput.length > 0) {
+            setCanvasData("")
             setTimeout(() => {
                 setShow(true)
                 generateCanvas(userInput)
             }, 1500)
             clearTimeout()
         }
-    }, [userInput])
+    }, [userInput, currentChatData])
 
     useEffect(() => {
         if (bottomOfChat.current) {
             bottomOfChat.current.scrollIntoView({behavior: "smooth"})
         }
     }, [isGenerating])
+
 
     const generateCanvas = async (userInput) => {
         setIsGenerating(true)
@@ -53,6 +69,7 @@ const chatdisplay = ({ userInput }) => {
 
             if (response.ok) {
                 setCanvasData(result.data)
+                onSaveChat(result.data.businessTitle, userInput, result.data)
             }
             else {
                 setError(result.error || "Error generating canvas.") 
@@ -94,9 +111,9 @@ const chatdisplay = ({ userInput }) => {
     return (
         <div className="flex flex-col w-250 h-11/12 self-center overflow-auto mt-5 scroll-behavior-smooth scrollbar-gutter-stable p-10 pt-0 overflow-x-scroll gap-10">
             <AiMessage output = {startMessage} first={true} />
-            {userInput.length > 0 && (
+            {userInputDisplay.length > 0 && (
                 <>
-                    <UserMessage message={userInput} />
+                    <UserMessage message={userInputDisplay} />
                     {show && (
                         <AiMessage output={generatingMessage} first={true} className="opacity-0 transition-opacity duration-1000" />
                     )}
@@ -112,13 +129,13 @@ const chatdisplay = ({ userInput }) => {
                         <AiMessage output = {error} first={false} />
                     )}
 
-                    {canvasData && !viewing && (
+                    {canvasData && !viewing && !isGenerating && (
                         <>
                             <div className="relative w-fit bg-cover bg-no-repeat rounded-4xl ml-25" style={{backgroundImage: "url('/canvas-skeleton.png')"}}>
                                 <img src="/canvas-skeleton.png" alt="canvas" className="h-115 w-95 ml-25 opacity-0"/>
                                 <div className="absolute inset-0 bg-black opacity-20 left-0" />
                                 <h1 className="text-white font-inter font-extrabold w-100 text-center absolute text-xl left-10 bottom-80 border-4 border-red-500 bg-black rounded-4xl p-5 ">
-                                        {canvasData.businessTitle}
+                                    {canvasData ? canvasData.businessTitle : ""}
                                 </h1>
                                 <div className="flex flex-col gap-5 absolute left-35 bottom-35 ">
                                     <MainButton name="View/Download" onClick={viewingCanvas} />
