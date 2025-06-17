@@ -133,11 +133,10 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData }) => {
                         <>
                             <div className="relative w-fit bg-cover bg-no-repeat rounded-4xl ml-25" style={{backgroundImage: "url('/canvas-skeleton.png')"}}>
                                 <img src="/canvas-skeleton.png" alt="canvas" className="h-115 w-95 ml-25 opacity-0"/>
-                                <div className="absolute inset-0 bg-black opacity-20 left-0" />
-                                <h1 className="text-white font-inter font-extrabold w-100 text-center absolute text-xl left-10 bottom-80 border-4 border-red-500 bg-black rounded-4xl p-5 ">
+                                <h1 className="text-white font-inter font-extrabold w-100 text-center absolute text-xl left-10 bottom-80 border-4 border-red-500 bg-black rounded-4xl p-5 z-15">
                                     {canvasData ? canvasData.businessTitle : ""}
                                 </h1>
-                                <div className="flex flex-col gap-5 absolute left-35 bottom-35 ">
+                                <div className="flex flex-col gap-5 absolute left-35 bottom-35 z-15 ">
                                     <MainButton name="View/Download" onClick={viewingCanvas} />
                                 </div>
                             </div>
