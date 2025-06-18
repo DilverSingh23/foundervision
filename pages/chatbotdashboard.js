@@ -147,7 +147,7 @@ export default function ChatbotDashboard() {
                                 </div>
                             ))}
                         </div>
-                        <div className="flex flex-row justify-center gap-40 items-center w-fit h-fit mt-auto">
+                        <div className="flex flex-row justify-center gap-30 items-center w-fit h-fit mt-auto">
                             <img src="foundervision-logo.png" className="w-[40px] h-[40px] border-2 border-black rounded-4xl cursor-pointer" onClick={backToHome} />
                             <div className="flex gap-9">
                                 <FaMap className="text-white w-[30px] h-[30px] cursor-pointer" />
@@ -169,11 +169,11 @@ export default function ChatbotDashboard() {
                         </div>
                         <ChatDisplay userInput={submittedInput} onSaveChat={saveChat} currentChatData={getCurrentChatData()}  />
                         {inputField && (
-                            <div className="flex justify-center w-full mb-5">
+                            <div className="flex justify-center w-full  mb-5">
                                 <form onSubmit={handleUserInput} className="flex border-2 border-red-400 gap-2 rounded-3xl p-3 items-center">
                                     <textarea 
                                         rows = {4}
-                                        className="text-white w-180 h-20 focus:outline-none focus:ring-0 resize-none font-inter font-light" 
+                                        className="text-white w-180 max-[950px]:w-130 max-[665px]:w-80 h-20 focus:outline-none focus:ring-0 resize-none font-inter font-light" 
                                         placeholder="What is your business idea?"
                                         value = { userInput }
                                         onChange={e => setUserInput(e.target.value)}
