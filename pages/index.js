@@ -19,7 +19,7 @@ export default function Home() {
   },[])
 
   return (
-    <section className="w-ful flex-center flex-col">
+    <section className="flex w-full flex-center flex-col">
       <Navbar />
       <div className = {`transition-opacity duration-2000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="flex flex-col justify-center items-center gap-5 mt-20 md:mt-45 w-full">
