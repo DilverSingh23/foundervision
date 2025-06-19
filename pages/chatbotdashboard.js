@@ -137,7 +137,7 @@ export default function ChatbotDashboard() {
                                 <div className="flex cursor-pointer w-full h-10 hover:bg-white/20 hover:text-shadow-white/20 hover:text-shadow-xs p-5 rounded-2xl" key={chat.id} onClick={() => clickableChats ? loadChat(chat.id) : null} >
                                     <div className="flex flex-row items-center gap-5 justify-center w-full hover">
                                         <p className="font-inter font-bold text-white w-55 text-nowrap overflow-hidden text-ellipsis">{chat.businessTitle}</p>
-                                        <div className="w-fit h-fit font-inter font-light text-white" onClick={(e) => {
+                                        <div className="w-fit h-fit font-inter font-light text-white hover:text-red-400" onClick={(e) => {
                                             e.stopPropagation()
                                             deleteChat(chat.id)
                                             }}>
@@ -150,8 +150,8 @@ export default function ChatbotDashboard() {
                         <div className="flex flex-row justify-center gap-30 self-center items-center w-fit h-fit mt-auto">
                             <img src="foundervision-logo.png" className="w-[40px] h-[40px] border-2 border-black rounded-4xl cursor-pointer" onClick={backToHome} />
                             <div className="flex gap-9">
-                                <FaMap className="text-white w-[30px] h-[30px] cursor-pointer" />
-                                <FaQuestionCircle className="text-white w-[30px] h-[30px] cursor-pointer" />
+                                <FaMap className="text-white w-[30px] h-[30px] cursor-pointer hover:text-red-400" />
+                                <FaQuestionCircle className="text-white w-[30px] h-[30px] cursor-pointer hover:text-red-400" />
                             </div>
                         </div>
                     </div>

@@ -41,7 +41,7 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData, setClickableChats
             setTimeout(() => {
                 setShow(true)
                 generateCanvas(userInput)
-            }, 2000)
+            }, 1800)
             clearTimeout()
         }
     }, [userInput, currentChatData])
@@ -154,7 +154,7 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData, setClickableChats
                             <div ref={canvas} className="max-[665px]:w-300">
                                 <BusinessCanvas canvasData={canvasData}/>
                             </div>
-                            <div className="flex items-center gap-1 w-fit h-fit text-white text-lg cursor-pointer font-extralight mb-5 mt-3 ml-5 ">
+                            <div className="flex items-center gap-1 w-fit h-fit text-white text-lg cursor-pointer font-extralight mb-5 mt-3 ">
                                 <button className="flex gap-3 items-center bg-white rounded-4xl p-3 cursor-pointer  hover:bg-gray-200" onClick={notViewingCanvas}>
                                     <IoIosCloseCircle className="rounded-4xl text-2xl text-red-500" onClick={notViewingCanvas}/>
                                     <h1 className="text-black">Close Canvas</h1>

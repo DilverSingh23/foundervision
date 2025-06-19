@@ -1,6 +1,7 @@
 import Navbar from "@/components/navbar";
 import MainButton from "@/components/mainbutton";
 import Footer from "@/components/footer";
+import Guide from "@/components/guide";
 import {useState, useEffect} from "react";
 import { useRouter } from "next/router";
 
@@ -38,7 +39,9 @@ export default function Home() {
             FounderVision analyzes your startup idea and instantly generates a structured business canvas, 
             powered by AI insights, to help you build faster and smarter.</p>
             <MainButton name="Launch Your Idea" onClick={handleOnClick} />
+            <img src = "landingimage.png" alt="Landing Image" className="w-250 rounded-3xl" />
           </div>
+          <Guide />
         </div>
       </div>
       <Footer />
