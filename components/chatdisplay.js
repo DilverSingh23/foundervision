@@ -9,7 +9,7 @@ import { IoIosCloseCircle, IoIosDownload } from "react-icons/io";
 import html2canvas from "html2canvas-pro";
 import jsPDF from "jspdf";
 
-const chatdisplay = ({ userInput, onSaveChat, currentChatData }) => {
+const chatdisplay = ({ userInput, onSaveChat, currentChatData, setClickableChats }) => {
     const [show, setShow] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false);
     const [canvasData, setCanvasData] = useState(null);
@@ -31,8 +31,8 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData }) => {
             setCanvasData(null)
             setShow(false)
             setError("")
-            setViewing(false)
         }
+        setViewing(false)
     }, [currentChatData])
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData }) => {
             setTimeout(() => {
                 setShow(true)
                 generateCanvas(userInput)
-            }, 1500)
+            }, 2000)
             clearTimeout()
         }
     }, [userInput, currentChatData])
@@ -49,6 +49,12 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData }) => {
     useEffect(() => {
         if (bottomOfChat.current) {
             bottomOfChat.current.scrollIntoView({behavior: "smooth"})
+        }
+        if (isGenerating) {
+            setClickableChats(false)
+        }
+        else {
+            setClickableChats(true)
         }
     }, [isGenerating])
 

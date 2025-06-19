@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FaHome, FaPlus, FaMap, FaQuestionCircle, FaTrash } from "react-icons/fa";
 import { IoRocketSharp } from "react-icons/io5";
-import { IoIosCloseCircle } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
 import ChatDisplay from "../components/chatdisplay";
 
@@ -15,6 +14,7 @@ export default function ChatbotDashboard() {
     const [savedChats, setSavedChats] = useState([]);
     const [currentChatId, setCurrentChatId] = useState(null);
     const [hamburgerToggle, setHamburgerToggle] = useState(false);
+    const [clickableChats, setClickableChats] = useState(true);
     const router = useRouter();
     const backToHome = () => {
         router.push("/");
@@ -86,7 +86,7 @@ export default function ChatbotDashboard() {
             return updatedChats
         })
 
-        if (currentChatId === chatId) {
+        if (currentChatId === chatId || (!currentChatId && submittedInput.length > 0)) {
             setSubmittedInput("")
             setInputField(true)
             setUserInput("")
@@ -114,7 +114,7 @@ export default function ChatbotDashboard() {
         <section className="flex justify-center w-screen h-screen overflow-x-hidden overflow-clip">
             <div className="flex flex-row justify-center">
                 <div className={`flex justify-center items-center w-screen transitition-opacity duration-2000 ${isLoaded ? "opacity-100" : "opacity-0" }`}>
-                    <div className={`flex flex-col w-85 h-full bg-gradient-to-r from-rose-500 to-red-700 p-8 pl-5 pr-5 border-white z-100 ${hamburgerToggle ? "max-[1335px]:absolute max-[1335px]:flex  max-[1335px]:left-0  max-[1335px]:z-100 max-[1335px]:pt-5" : "max-[1335px]:hidden"}`}>
+                    <div className={`flex flex-col w-[360px] h-full bg-gradient-to-r from-rose-500 to-red-700 p-8 pl-5 pr-5 border-white z-100 overflow-hidden ${hamburgerToggle ? "max-[1335px]:absolute max-[1335px]:flex  max-[1335px]:left-0  max-[1335px]:z-100 max-[1335px]:pt-5" : "max-[1335px]:hidden"}`}>
                         {hamburgerToggle && (
                             <div className="mb-10" onClick={() => setHamburgerToggle(false)}/>
                         )}
@@ -127,14 +127,14 @@ export default function ChatbotDashboard() {
                                 <FaHome className="text-xl"/>
                                 <h2 className="text-base">Home</h2>
                             </div>
-                            <div className="flex gap-2 text-white bg-white/30 rounded-3xl p-3 font-inter font-medium text-center cursor-pointer hover:bg-white/50" onClick={createNewChat}>
+                            <div className="flex gap-2 text-white bg-white/30 rounded-3xl p-3 font-inter font-medium text-center cursor-pointer hover:bg-white/50" onClick={clickableChats ? createNewChat : null}>
                                 <FaPlus className="text-xl"/>
                                 <h2 className="text-base">New</h2>
                             </div>
                         </div>
                         <div className="flex flex-col gap-10 mt-12 w-full">
                             {savedChats.map((chat) => (
-                                <div className="flex cursor-pointer w-full h-10 hover:bg-white/20 hover:text-shadow-white/20 hover:text-shadow-xs p-5 rounded-2xl" key={chat.id} onClick={() => loadChat(chat.id)} >
+                                <div className="flex cursor-pointer w-full h-10 hover:bg-white/20 hover:text-shadow-white/20 hover:text-shadow-xs p-5 rounded-2xl" key={chat.id} onClick={() => clickableChats ? loadChat(chat.id) : null} >
                                     <div className="flex flex-row items-center gap-5 justify-center w-full hover">
                                         <p className="font-inter font-bold text-white w-55 text-nowrap overflow-hidden text-ellipsis">{chat.businessTitle}</p>
                                         <div className="w-fit h-fit font-inter font-light text-white" onClick={(e) => {
@@ -147,7 +147,7 @@ export default function ChatbotDashboard() {
                                 </div>
                             ))}
                         </div>
-                        <div className="flex flex-row justify-center gap-30 items-center w-fit h-fit mt-auto">
+                        <div className="flex flex-row justify-center gap-30 self-center items-center w-fit h-fit mt-auto">
                             <img src="foundervision-logo.png" className="w-[40px] h-[40px] border-2 border-black rounded-4xl cursor-pointer" onClick={backToHome} />
                             <div className="flex gap-9">
                                 <FaMap className="text-white w-[30px] h-[30px] cursor-pointer" />
@@ -167,11 +167,11 @@ export default function ChatbotDashboard() {
                             <img src="founderai.png" className="w-25 h-25"/>
                             <h2 className="">FounderAI</h2>
                         </div>
-                        <ChatDisplay userInput={submittedInput} onSaveChat={saveChat} currentChatData={getCurrentChatData()}  />
+                        <ChatDisplay userInput={submittedInput} onSaveChat={saveChat} currentChatData={getCurrentChatData()} setClickableChats={setClickableChats}  />
                         {inputField && (
                             <div className="flex justify-center w-full  mb-5">
                                 <form onSubmit={handleUserInput} className="flex border-2 border-red-400 gap-2 rounded-3xl p-3 items-center">
-                                    <textarea 
+                                    <textarea
                                         rows = {4}
                                         className="text-white w-180 max-[950px]:w-130 max-[665px]:w-80 h-20 focus:outline-none focus:ring-0 resize-none font-inter font-light" 
                                         placeholder="What is your business idea?"
