@@ -18,7 +18,7 @@ const guide = () => {
                 <img src="guide-image2.png" alt="View Canvas Image" className="self-center justify-self-center w-170 rounded-4xl"/>
                 <div className="flex flex-col gap-5 border-r-3 pr-3 border-red-500">
                     <h1 className="text-white text-4xl font-extrabold">View Your Business Canvas</h1>
-                    <p className="text-gray-300 text-lg font-normal w-150">Once FounderAi generates your canvas, your chat will be saved to the dashboard. You can view or download your business model by clicking the 'View/Download' button.
+                    <p className="text-gray-300 text-lg font-normal w-150">Once FounderAI generates your canvas, your chat will be saved to the dashboard. You can view or download your business model by clicking the 'View/Download' button.
                     </p>
                 </div>
             </div>

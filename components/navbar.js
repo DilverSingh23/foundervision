@@ -19,7 +19,7 @@ const navbar = () => {
     }, [])
 
     return (
-        <div className={`flex justify-self-center self-center justify-center w-fit p-3 pl-5 pr-5 h-fit mt-5 fixed top-0 rounded-4xl ${scrollY > 100 ? "bg-red-500/20" : "bg-none"} gap-10 md:gap-100 lg:gap-160`} onClick={backToHome}>
+        <div className={`flex justify-self-center self-center justify-center w-fit p-3 pl-5 pr-5 h-fit mt-5 z-100 fixed top-0 rounded-4xl ${scrollY > 100 ? "bg-red-500/20" : "bg-none"} gap-10 md:gap-100 lg:gap-160`} onClick={backToHome}>
             <div className="flex justify-center align-middle gap-1.5 md:gap-2.5 cursor-pointer">
                 <img src = "/foundervision-logo.png" alt="FounderVision" className='w-10 m:w-25'></img>
                 <h1 className='text-white mt-3 md:mt-2 font-inter font-extrabold text-s md:text-xl'>FounderVision</h1>

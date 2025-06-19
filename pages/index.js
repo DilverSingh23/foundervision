@@ -2,6 +2,7 @@ import Navbar from "@/components/navbar";
 import MainButton from "@/components/mainbutton";
 import Footer from "@/components/footer";
 import Guide from "@/components/guide";
+import Founders from "@/components/founders";
 import {useState, useEffect} from "react";
 import { useRouter } from "next/router";
 
@@ -42,6 +43,7 @@ export default function Home() {
             <img src = "landingimage.png" alt="Landing Image" className="w-250 rounded-3xl" />
           </div>
           <Guide />
+          <Founders />
         </div>
       </div>
       <Footer />
