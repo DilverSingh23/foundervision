@@ -1,3 +1,4 @@
+'use client'
 import Navbar from "@/components/navbar";
 import MainButton from "@/components/mainbutton";
 import Footer from "@/components/footer";
@@ -11,6 +12,8 @@ import { useRouter } from "next/router";
 export default function Home() {
   const router = useRouter()
   const [isLoaded, setIsLoaded] = useState(false)
+  const [firstTime, setFirstTime] = useState(false)
+
   const guide = useRef(null);
   const faq = useRef(null);
   const founders = useRef(null);
@@ -49,13 +52,23 @@ export default function Home() {
   },[])
 
   useEffect(() => {
-    if (router.asPath.includes("#guide")) {
-      handleGuideClick();
+    if (firstTime) {
+      if (window.location.hash) {
+        window.history.replaceState(null, null, window.location.pathname)
+      }
+      return
     }
-    else if (router.asPath.includes("#faq")) {
-      handleFAQClick();
+    else {
+      if (router.asPath.includes("#guide")) {
+        handleGuideClick();
+        setFirstTime(true)
+      }
+      else if (router.asPath.includes("#faq")) {
+        handleFAQClick();
+        setFirstTime(true)
+      }
     }
-  }, [router.asPath])
+  }, [router.asPath, firstTime])
 
   return (
     <section className="flex w-full flex-center flex-col overflow-x-hidden" ref={home}>

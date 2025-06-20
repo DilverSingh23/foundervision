@@ -26,7 +26,9 @@ const footer = ({ guideOnClick, faqOnClick, foundersOnClick, backToHome }) => {
                         <li className="cursor-pointer hover:text-red-500">Tech Incubator</li>
                     </a>
                     <li className="cursor-pointer hover:text-red-500">Privacy Policy</li>
-                    <li className="cursor-pointer hover:text-red-500">Contact</li>
+                    <a href="mailto:dsinghh23@gmail.com, baidyapiyas@gmail.com">
+                        <li className="cursor-pointer hover:text-red-500">Contact</li>
+                    </a>
                 </ul>
                 <div className="flex flex-col 1_5xl:ml-70">
                     <h1 className="text-white font-inter font-bold text-center text-2xl">Social</h1>
