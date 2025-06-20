@@ -115,7 +115,7 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData, setClickableChats
 
 
     return (
-        <div className="flex flex-col w-250 h-11/12 self-center overflow-auto mt-5 scroll-behavior-smooth scrollbar-gutter-stable p-10 pt-0 overflow-x-scroll gap-10 max-[950px]:w-180 max-[665px]:w-120">
+        <div className="flex flex-col w-250 h-11/12 self-center overflow-auto mt-5 scroll-behavior-smooth scrollbar-gutter-stable p-10 pt-0 overflow-x-scroll gap-10 max-[950px]:w-180 max-[665px]:w-120 max-[450px]:w-110 max-[450px]:pl-8">
             <AiMessage output = {startMessage} first={true} />
             {userInputDisplay.length > 0 && (
                 <>
@@ -137,12 +137,12 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData, setClickableChats
 
                     {canvasData && !viewing && !isGenerating && (
                         <>
-                            <div className="relative w-fit bg-cover bg-no-repeat rounded-4xl ml-25" style={{backgroundImage: "url('/canvas-skeleton.png')"}}>
+                            <div className="relative w-fit bg-cover bg-no-repeat rounded-4xl ml-25" style={{backgroundImage: "url('/canvas-skeleton.png')", backgroundPosition: "center"}}>
                                 <img src="/canvas-skeleton.png" alt="canvas" className="h-115 w-95 ml-25 opacity-0 max-[665px]:h-75 max-[665px]:w-85 "/>
-                                <h1 className="text-white font-inter font-extrabold w-100 max-[665px]:w-65 text-center absolute text-xl max-[665px]:text-xs left-10 max-[665px]:left-5 max-[665px]:bottom-50 bottom-80 border-4 border-red-500 bg-black rounded-4xl p-5 z-15">
+                                <h1 className="text-white font-inter font-extrabold w-100 max-[665px]:w-65 text-center absolute text-xl max-[665px]:text-[16px] left-10 max-[665px]:left-5 max-[450px]:left-1 max-[665px]:bottom-50 bottom-80 border-4 border-red-500 bg-black rounded-4xl p-5 max-[450px]:p-l-0 max-[450px]:p-r-0 z-15">
                                     {canvasData ? canvasData.businessTitle : ""}
                                 </h1>
-                                <div className="flex flex-col gap-5 absolute left-35 max-[665px]:left-14 bottom-35 max-[665px]:bottom-25 z-15 ">
+                                <div className="flex flex-col gap-5 absolute left-35 max-[665px]:left-14 max-[450px]:left-10 bottom-35 max-[665px]:bottom-25 max-[450px]:bottom-20 z-15 ">
                                     <MainButton name="View/Download" onClick={viewingCanvas} />
                                 </div>
                             </div>
