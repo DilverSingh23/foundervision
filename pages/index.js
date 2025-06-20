@@ -3,6 +3,7 @@ import MainButton from "@/components/mainbutton";
 import Footer from "@/components/footer";
 import Guide from "@/components/guide";
 import Founders from "@/components/founders";
+import FAQ from "@/components/faq";
 import {useState, useEffect} from "react";
 import { useRouter } from "next/router";
 
@@ -23,7 +24,7 @@ export default function Home() {
     <section className="flex w-full flex-center flex-col">
       <Navbar />
       <div className = {`transition-opacity duration-2000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="flex flex-col justify-center items-center gap-5 mt-20 md:mt-45 w-full">
+        <div className="flex flex-col justify-center items-center gap-5 mt-45 w-full">
           <h2 className="flex justify-center bg-red-800 text-white text-center w-75 rounded-4xl p-2 text-s">Your Personal Startup Strategist</h2>
           <h1 className="text-3xl md:text-4xl lg:text-5xl text-center font-inter font-extrabold bg-gradient-to-r from-rose-500 to-red-700 bg-clip-text text-transparent">
             Your Startup Vision, Structured in Seconds
@@ -43,6 +44,7 @@ export default function Home() {
             <img src = "landingimage.png" alt="Landing Image" className="w-250 rounded-3xl" />
           </div>
           <Guide />
+          <FAQ />
           <Founders />
         </div>
       </div>
