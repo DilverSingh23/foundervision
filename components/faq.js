@@ -32,7 +32,7 @@ const faq = () => {
     return (
         <div className="flex flex-col font-inter justify-center items-center mt-30 gap-y-15">
             <h1 className={`bg-gradient-to-r bg-clip-text text-transparent from-rose-500 to-red-600 text-4xl font-extrabold transition-opacity duration-1000 ${titleInView ? "opacity-100" : "opacity-0"}`} ref={title}>FAQ</h1>
-            <div className={`flex flex-col h-fit w-250 bg-black rounded-4xl transition-all duration-800 pb-[40px] ${questionsInView ? "translate-y-0 opacity-100" : "translate-y-75 opacity-0"}`} ref={questions}> 
+            <div className={`flex flex-col h-fit w-250 max-[1050px]:w-200 max-[840px]:w-150 max-[630px]:w-125 max-[530px]:w-90 bg-black rounded-4xl transition-all duration-800 pb-[40px] ${questionsInView ? "translate-y-0 opacity-100" : "translate-y-75 opacity-0"}`} ref={questions}> 
                 <Question question={question1} answer={answer1} />
                 <Question question={question2} answer={answer2} />
                 <Question question={question3} answer={answer3} />

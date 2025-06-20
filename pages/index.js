@@ -91,7 +91,7 @@ export default function Home() {
             FounderVision analyzes your startup idea and instantly generates a structured business canvas, 
             powered by AI insights, to help you build faster and smarter.</p>
             <MainButton name="Launch Your Idea" onClick={handleOnClick} />
-            <img src = "landingimage.png" alt="Landing Image" className="w-250 rounded-3xl" />
+            <img src = "landingimage.png" alt="Landing Image" className="w-250 max-[1050px]:w-200 max-[840px]:w-150 max-[630px]:w-125 max-[530px]:w-100 max-[430px]:w-90 rounded-3xl" />
           </div>
           <div ref={guide}>
             <Guide />
