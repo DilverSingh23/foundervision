@@ -1,12 +1,9 @@
-import React from "react";
 import { useRouter } from "next/router";
+import React from "react";
 import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
 
-const footer = () => {
-    const router = useRouter()
-    const backToHome = () => {
-        router.push("/")
-    }
+const footer = ({ guideOnClick, faqOnClick, foundersOnClick, backToHome }) => {
+    const router = useRouter();
     const toChatbotDashboard = () => {
         router.push("/chatbotdashboard")
     }
@@ -18,38 +15,38 @@ const footer = () => {
             </div>
             <div className="flex mm:gap-10 md:gap-30 lg:gap-50 2xl:gap-75">
                 <ul className="flex flex-col gap-5 text-white font-inter font-normal ml-8 2xs:ml-10 ss:ml-21 mt-10">
-                    <li className="cursor-pointer" onClick={backToHome}>Home</li>
-                    <li className="cursor-pointer" onClick={toChatbotDashboard}>Chatbot</li>
-                    <li>Guide</li>
-                    <li>FAQ</li>
+                    <li className="cursor-pointer hover:text-red-500" onClick={backToHome}>Home</li>
+                    <li className="cursor-pointer hover:text-red-500" onClick={toChatbotDashboard}>Chatbot</li>
+                    <li className="cursor-pointer hover:text-red-500" onClick={guideOnClick}>Guide</li>
+                    <li className="cursor-pointer hover:text-red-500" onClick={faqOnClick}>FAQ</li>
                 </ul>
                 <ul className="flex flex-col gap-5 text-white font-inter font-normal ml-8 xss:ml-21 mt-10">
-                    <li>Founders</li>
+                    <li className="cursor-pointer hover:text-red-500" onClick={foundersOnClick}>Founders</li>
                     <a href="https://techincubatorqc.com/">
-                        <li className="cursor-pointer">Tech Incubator</li>
+                        <li className="cursor-pointer hover:text-red-500">Tech Incubator</li>
                     </a>
-                    <li>Privacy Policy</li>
-                    <li>Contact</li>
+                    <li className="cursor-pointer hover:text-red-500">Privacy Policy</li>
+                    <li className="cursor-pointer hover:text-red-500">Contact</li>
                 </ul>
                 <div className="flex flex-col 1_5xl:ml-70">
                     <h1 className="text-white font-inter font-bold text-center text-2xl">Social</h1>
                     <ul className="flex flex-col gap-5 text-white font-inter font-light ml-10 mt-8">
                         <a href="https://www.instagram.com/qctechincubator/">
                             <li className="flex gap-3 no-underline">
-                                <FaInstagram className="text-red-400 mt-1" />
-                                <h3 className="text-white text-base font-inter font-bold no-underline">Instagram</h3>
+                                <FaInstagram className="text-red-400 mt-1 hover:text-red-500" />
+                                <h3 className="text-gray-200 text-base font-inter font-bold no-underline hover:text-white cursor-pointer">Instagram</h3>
                             </li>
                         </a>
                         <a href="https://www.facebook.com/QCTechIncubator/">
                             <li className="flex gap-3 no-underline">
-                                <FaFacebook className="text-red-400 mt-1" />
-                                <h3 className="text-white text-base font-inter font-bold no-underline">Facebook</h3>
+                                <FaFacebook className="text-red-400 mt-1 hover:text-red-500" />
+                                <h3 className="text-gray-200 text-base font-inter font-bold no-underline hover:text-white cursor-pointer">Facebook</h3>
                             </li>
                         </a>
                         <a href="https://x.com/qctechincubator?lang=en">
                             <li className="flex gap-3">
-                                <FaTwitter className="text-red-400 mt-1" />
-                                <h3 className="text-white text-base font-inter font-bold no-underline">Twitter</h3>
+                                <FaTwitter className="text-red-400 mt-1 hover:text-red-500" />
+                                <h3 className="text-gray-200 text-base font-inter font-bold no-underline hover:text-white cursor-pointer">Twitter</h3>
                             </li>
                         </a>
                     </ul>

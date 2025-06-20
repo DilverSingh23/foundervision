@@ -4,25 +4,62 @@ import Footer from "@/components/footer";
 import Guide from "@/components/guide";
 import Founders from "@/components/founders";
 import FAQ from "@/components/faq";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import { useRouter } from "next/router";
 
 
 export default function Home() {
   const router = useRouter()
   const [isLoaded, setIsLoaded] = useState(false)
+  const guide = useRef(null);
+  const faq = useRef(null);
+  const founders = useRef(null);
+  const home = useRef(null);
 
   const handleOnClick = () => {
     router.push('/chatbotdashboard');
   }
 
-  useEffect( () =>{
+  const handleGuideClick = () => {
+    if(guide.current) {
+      guide.current.scrollIntoView({behavior: "smooth"})
+    }
+  }
+
+  const handleFAQClick = () => {
+    if(faq.current){
+      faq.current.scrollIntoView({behavior: "smooth"})
+    }
+  }
+
+  const handleFoundersClick = () => {
+    if(founders.current){
+      founders.current.scrollIntoView({behavior: "smooth"})
+    }
+  }
+
+  const backToHome = () => {
+    if (home) {
+      home.current.scrollIntoView({behavior: "smooth"})
+    }
+  }
+
+  useEffect(() =>{
     setIsLoaded(true)
   },[])
 
+  useEffect(() => {
+    if (router.asPath.includes("#guide")) {
+      handleGuideClick();
+    }
+    else if (router.asPath.includes("#faq")) {
+      handleFAQClick();
+    }
+  }, [router.asPath])
+
   return (
-    <section className="flex w-full flex-center flex-col">
-      <Navbar />
+    <section className="flex w-full flex-center flex-col overflow-x-hidden" ref={home}>
+      <Navbar guideOnClick={handleGuideClick} faqOnClick={handleFAQClick} foundersOnClick={handleFoundersClick} backToHome={backToHome}/>
       <div className = {`transition-opacity duration-2000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="flex flex-col justify-center items-center gap-5 mt-45 w-full">
           <h2 className="flex justify-center bg-red-800 text-white text-center w-75 rounded-4xl p-2 text-s">Your Personal Startup Strategist</h2>
@@ -43,12 +80,18 @@ export default function Home() {
             <MainButton name="Launch Your Idea" onClick={handleOnClick} />
             <img src = "landingimage.png" alt="Landing Image" className="w-250 rounded-3xl" />
           </div>
-          <Guide />
-          <FAQ />
-          <Founders />
+          <div ref={guide}>
+            <Guide />
+          </div>
+          <div ref={faq}>
+            <FAQ />
+          </div>
+          <div ref={founders}>
+            <Founders />
+          </div>
         </div>
       </div>
-      <Footer />
+      <Footer guideOnClick={handleGuideClick} faqOnClick={handleFAQClick} foundersOnClick={handleFoundersClick} backToHome={backToHome} />
     </section>
   )
 }

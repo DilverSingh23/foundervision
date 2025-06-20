@@ -19,6 +19,12 @@ export default function ChatbotDashboard() {
     const backToHome = () => {
         router.push("/");
     }
+    const guideOnClick = () => {
+        router.push("/#guide")
+    }
+    const faqOnClick = () => {
+        router.push("/#faq")
+    }
     const handleUserInput = (e) => {
         e.preventDefault()
         if (userInput.trim() == "") {
@@ -150,8 +156,8 @@ export default function ChatbotDashboard() {
                         <div className="flex flex-row justify-center gap-30 self-center items-center w-fit h-fit mt-auto">
                             <img src="foundervision-logo.png" className="w-[40px] h-[40px] border-2 border-black rounded-4xl cursor-pointer" onClick={backToHome} />
                             <div className="flex gap-9">
-                                <FaMap className="text-white w-[30px] h-[30px] cursor-pointer hover:text-red-400" />
-                                <FaQuestionCircle className="text-white w-[30px] h-[30px] cursor-pointer hover:text-red-400" />
+                                <FaMap className="text-white w-[30px] h-[30px] cursor-pointer hover:text-red-400" onClick={guideOnClick}/>
+                                <FaQuestionCircle className="text-white w-[30px] h-[30px] cursor-pointer hover:text-red-400" onClick={faqOnClick} />
                             </div>
                         </div>
                     </div>
