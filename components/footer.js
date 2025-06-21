@@ -7,6 +7,9 @@ const footer = ({ guideOnClick, faqOnClick, foundersOnClick, backToHome }) => {
     const toChatbotDashboard = () => {
         router.push("/chatbotdashboard")
     }
+    const toPrivacyPolicy = () => {
+        router.push("/privacypolicy")
+    }
     return (
         <div className="flex flex-col items-start 3xl:items-center h-105 w-full mt-50 bg-[#0A0D13]">
             <div className="flex justify-center gap-1.5 md:gap-2.5 mt-10 ml-20 cursor-pointer" onClick={backToHome}>
@@ -25,7 +28,7 @@ const footer = ({ guideOnClick, faqOnClick, foundersOnClick, backToHome }) => {
                     <a href="https://techincubatorqc.com/">
                         <li className="cursor-pointer hover:text-red-500">Tech Incubator</li>
                     </a>
-                    <li className="cursor-pointer hover:text-red-500">Privacy Policy</li>
+                    <li className="cursor-pointer hover:text-red-500" onClick={toPrivacyPolicy}>Privacy Policy</li>
                     <a href="mailto:dsinghh23@gmail.com, baidyapiyas@gmail.com">
                         <li className="cursor-pointer hover:text-red-500">Contact</li>
                     </a>

@@ -1,8 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import NavButton from "./navbutton"
-const navbar = ({ guideOnClick, faqOnClick, foundersOnClick, backToHome }) => {
+import { useRouter } from 'next/router';
+const navbar = ({ guideOnClick, faqOnClick, backToHome }) => {
     const [scrollY, setScrollY] = useState(0);
+    const router = useRouter();
+    const goToChatbot = () => {
+        router.push("/chatbotdashboard")
+    }
     useEffect(() => {
         const handleScroll = () => {
             setScrollY(window.scrollY)
@@ -20,9 +25,9 @@ const navbar = ({ guideOnClick, faqOnClick, foundersOnClick, backToHome }) => {
                 <h1 className='text-white mt-3 md:mt-2 font-inter font-extrabold text-s md:text-xl'>FounderVision</h1>
             </div>
             <div className="flex justify-center align-middle gap-3 md:gap-7 text-xs mt-2 md:mt-1">
+                <NavButton name="Chatbot" onClick={goToChatbot}/>
                 <NavButton name="Guide" onClick={guideOnClick} />
                 <NavButton name="FAQ" onClick={faqOnClick}/>
-                <NavButton name="Founders" onClick={foundersOnClick} />
             </div>
         </div>
     )

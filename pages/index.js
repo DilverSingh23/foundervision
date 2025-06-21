@@ -60,19 +60,29 @@ export default function Home() {
     }
     else {
       if (router.asPath.includes("#guide")) {
-        handleGuideClick();
-        setFirstTime(true)
+        setTimeout(() => {
+          handleGuideClick();
+          setFirstTime(true)
+        }, 1)
       }
       else if (router.asPath.includes("#faq")) {
-        handleFAQClick();
-        setFirstTime(true)
+        setTimeout(() => {
+          handleFAQClick();
+          setFirstTime(true)
+        }, 1)
+      }
+      else if (router.asPath.includes("#founders")) {
+        setTimeout(() => {
+          handleFoundersClick();
+          setFirstTime(true)
+        }, 1)
       }
     }
   }, [router.asPath, firstTime])
 
   return (
     <section className="flex w-full flex-center flex-col overflow-x-hidden" ref={home}>
-      <Navbar guideOnClick={handleGuideClick} faqOnClick={handleFAQClick} foundersOnClick={handleFoundersClick} backToHome={backToHome}/>
+      <Navbar guideOnClick={handleGuideClick} faqOnClick={handleFAQClick} backToHome={backToHome}/>
       <div className = {`transition-opacity duration-2000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="flex flex-col justify-center items-center gap-5 mt-45 w-full">
           <h2 className="flex justify-center bg-red-800 text-white text-center w-75 rounded-4xl p-2 text-s">Your Personal Startup Strategist</h2>
