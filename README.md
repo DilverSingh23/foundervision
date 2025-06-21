@@ -1,40 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🚀 FounderVision
 
-## Getting Started
+**FounderVision** is an AI-powered business ideation tool built with **Next.js** and **Google's Gemini API**, designed to help aspiring entrepreneurs rapidly transform rough startup ideas into structured business models.
 
-First, run the development server:
+This platform allows users to describe their startup idea in plain text and instantly receive a complete **Business Model Canvas**, making it ideal for students, founders, and innovators who want to validate and plan ideas faster.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📌 How It Works
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### 🧠 For Founders & Creators
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. Enter your business idea in a simple input field.
+2. Click submit — FounderVision uses **Gemini Pro** to analyze your input.
+3. Receive a complete **Business Model Canvas**, including:
+  - Business Title
+  - Who Do You Serve
+  - Customer Problem
+  - Current Solutions
+  - Your Solution
+  - Your Story
+  - Revenue Model
+  - Customer Desire
+  - Distribution Channels
+  - Competitive Edge
+  - Startup Requirements
+  - Ongoing Needs
+4. Optionally save your generated canvases as "chats" for future reference.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+### 🗂 Chat History & Management
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Save up to 5 canvases per session  
+- Easily switch between previous chats  
+- Delete old chats to make room for new ideas
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠 Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- **Frontend**: Next.js, React, Tailwind CSS  
+- **AI Backend**: Node.js, Google Gemini 2.0 Flash API
+- **State Management**: React Hooks & `localStorage` for chat persistence  
+- **Deployment**: [Vercel](https://foundervision.vercel.app)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 💡 Why FounderVision?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> Starting a business often begins with a blurry idea. FounderVision helps you sharpen that vision — instantly.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+This tool is built to save time, reduce friction, and empower solo founders to take the first step with clarity and structure.
+
+---
+
+## 🔗 Live Demo
+
+👉 [foundervision.vercel.app](https://foundervision.vercel.app)
+
