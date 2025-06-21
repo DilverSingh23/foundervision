@@ -18,7 +18,8 @@ export default function ChatbotDashboard() {
     const [clickableChats, setClickableChats] = useState(true);
     const [chatsAlert, setChatsAlert] = useState(false)
     const [inputAlert, setInputAlert] = useState(false)
-    const[firstLoad, setFirstLoad] = useState(true);
+    const [firstLoad, setFirstLoad] = useState(true);
+    const [screenWidth, setScreenWidth] = useState(0);
     const router = useRouter();
     const backToHome = () => {
         router.push("/");
@@ -132,13 +133,14 @@ export default function ChatbotDashboard() {
         }
     }, [savedChats, firstLoad])
 
+
     return (
-        <section className="flex justify-center w-screen h-screen overflow-x-hidden overflow-clip">
+        <section className="flex justify-center w-screen h-full overflow-x-hidden overflow-clip">
             <div className="flex flex-row justify-center">
                 <div className={`flex justify-center items-center w-screen transitition-opacity duration-2000 ${isLoaded ? "opacity-100" : "opacity-0" }`}>
-                    <div className={`flex flex-col w-[360px] h-full bg-gradient-to-r from-rose-500 to-red-700 p-8 pl-5 pr-5 border-white z-100 overflow-hidden ${hamburgerToggle ? "max-[1335px]:absolute max-[1335px]:flex  max-[1335px]:left-0  max-[1335px]:z-100 max-[1335px]:pt-5" : "max-[1335px]:hidden"}`}>
+                    <div className={`flex flex-col w-[360px] h-screen bg-gradient-to-r from-rose-500 to-red-700 p-8 pl-5 pr-5 border-white z-100 overflow-hidden ${hamburgerToggle ? "max-[1335px]:absolute max-[1335px]:flex  max-[1335px]:left-0  max-[1335px]:z-100 max-[1335px]:pt-5" : "max-[1335px]:hidden"}`}>
                         {hamburgerToggle && (
-                            <div className="mb-10" onClick={() => setHamburgerToggle(false)}/>
+                            <div className="max-[1335px]:mb-10 min-[1336px]:hidden" onClick={() => setHamburgerToggle(false)}/>
                         )}
                         <div className="flex justify-between items-center">
                             <h1 className="text-white font-inter font-extrabold text-center text-3xl">Chats</h1>
@@ -162,7 +164,7 @@ export default function ChatbotDashboard() {
                                     </Alert>
                                 </div>
                             )}
-                        <div className="flex flex-col gap-10 mt-12 w-full">
+                        <div className="flex flex-col gap-10 mt-12 w-full h-full">
                             {savedChats.map((chat) => (
                                 <div className="flex cursor-pointer w-full h-10 hover:bg-white/20 hover:text-shadow-white/20 hover:text-shadow-xs p-5 rounded-2xl" key={chat.id} onClick={() => clickableChats ? loadChat(chat.id) : null} >
                                     <div className="flex flex-row items-center gap-5 justify-center w-full hover">
@@ -177,7 +179,7 @@ export default function ChatbotDashboard() {
                                 </div>
                             ))}
                         </div>
-                        <div className="flex flex-row justify-center gap-30 self-center items-center w-fit h-fit mt-auto">
+                        <div className="flex flex-row justify-center gap-30 self-center items-center w-fit h-fit mt-auto ">
                             <img src="foundervision-logo.png" className="w-[40px] h-[40px] border-2 border-black rounded-4xl cursor-pointer" onClick={backToHome} />
                             <div className="flex gap-9">
                                 <FaMap className="text-white w-[30px] h-[30px] cursor-pointer hover:text-red-400" onClick={guideOnClick}/>
@@ -193,7 +195,7 @@ export default function ChatbotDashboard() {
                         backgroundBlendMode: 'overlay'
                     }}>
                         <div className="w-full h-20 flex items-center text-white font-inter text-xl font-bold border-b-2 border-b-red-400 bg-black">
-                            <RxHamburgerMenu className=" z-200 hidden max-[1335px]:flex ml-5 cursor-pointer" onClick={openChatMenu} />
+                            <RxHamburgerMenu className="z-200 min-[1336px]:hidden ml-5 cursor-pointer" onClick={openChatMenu} />
                             <img src="founderai.png" className="w-25 h-25"/>
                             <h2 className="">FounderAI</h2>
                         </div>

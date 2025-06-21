@@ -36,6 +36,7 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData, setClickableChats
     }, [currentChatData])
 
     useEffect(() => {
+        setViewing(false)
         if (!currentChatData && userInput.length > 0) {
             setCanvasData("")
             setTimeout(() => {
