@@ -5,6 +5,7 @@ import { FaHome, FaPlus, FaMap, FaQuestionCircle, FaTrash } from "react-icons/fa
 import { IoRocketSharp } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import ChatDisplay from "../components/chatdisplay";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 
 export default function ChatbotDashboard() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -15,6 +16,9 @@ export default function ChatbotDashboard() {
     const [currentChatId, setCurrentChatId] = useState(null);
     const [hamburgerToggle, setHamburgerToggle] = useState(false);
     const [clickableChats, setClickableChats] = useState(true);
+    const [chatsAlert, setChatsAlert] = useState(false)
+    const [inputAlert, setInputAlert] = useState(false)
+    const[firstLoad, setFirstLoad] = useState(true);
     const router = useRouter();
     const backToHome = () => {
         router.push("/");
@@ -28,12 +32,13 @@ export default function ChatbotDashboard() {
     const handleUserInput = (e) => {
         e.preventDefault()
         if (userInput.trim() == "") {
-            alert("You can't submit an empty idea!")
+            setInputAlert(true)
             return
         }
         setSubmittedInput(userInput)
         setInputField(false)
         setUserInput("")
+        setInputAlert(false)
     }
 
     const handleKeyDown = (e) => {
@@ -66,14 +71,15 @@ export default function ChatbotDashboard() {
     }
 
     const createNewChat = () => {
-        if (savedChats.length == 5) {
-            alert("You have reached the 5 chat limit. Delete a chat to create a new one.")
+        if (savedChats.length >= 5) {
+            setChatsAlert(true)
             return
         }
         setSubmittedInput("")
         setInputField(true)
         setUserInput("")
         setCurrentChatId(null)
+        setInputAlert(false)
     }
 
     const loadChat = (chatId) => {
@@ -98,6 +104,7 @@ export default function ChatbotDashboard() {
             setUserInput("")
             setCurrentChatId(null)
         }
+        setChatsAlert(false)
     }
 
     const openChatMenu = () => {
@@ -107,14 +114,23 @@ export default function ChatbotDashboard() {
     useEffect(() => {
         const storedChats = localStorage.getItem("founderai-chats")
         if (storedChats) {
-            setSavedChats(JSON.parse(storedChats));
+            const chats = JSON.parse(storedChats)
+            setSavedChats(chats)
+            if (chats.length === 5){
+                setSubmittedInput(chats[0].userIdea)
+                setInputField(false)
+                setCurrentChatId(chats[0].id)
+            }
         }
+        setFirstLoad(false)
         setIsLoaded(true);
     },[])
 
     useEffect(() => {
-        localStorage.setItem("founderai-chats", JSON.stringify(savedChats))
-    }, [savedChats])
+        if (!firstLoad) {
+            localStorage.setItem("founderai-chats", JSON.stringify(savedChats))
+        }
+    }, [savedChats, firstLoad])
 
     return (
         <section className="flex justify-center w-screen h-screen overflow-x-hidden overflow-clip">
@@ -138,6 +154,14 @@ export default function ChatbotDashboard() {
                                 <h2 className="text-base">New</h2>
                             </div>
                         </div>
+                        {chatsAlert && (
+                                <div className="grid w-full max-w-xl items-start gap-4 mt-5">
+                                    <Alert variant="destructive" className="bg-white rounded-2xl text-red-500">
+                                        <AlertTitle>You have hit the 5 chat limit.</AlertTitle>
+                                        <AlertTitle >Delete a chat to create a new one.</AlertTitle>
+                                    </Alert>
+                                </div>
+                            )}
                         <div className="flex flex-col gap-10 mt-12 w-full">
                             {savedChats.map((chat) => (
                                 <div className="flex cursor-pointer w-full h-10 hover:bg-white/20 hover:text-shadow-white/20 hover:text-shadow-xs p-5 rounded-2xl" key={chat.id} onClick={() => clickableChats ? loadChat(chat.id) : null} >
@@ -173,7 +197,7 @@ export default function ChatbotDashboard() {
                             <img src="founderai.png" className="w-25 h-25"/>
                             <h2 className="">FounderAI</h2>
                         </div>
-                        <ChatDisplay userInput={submittedInput} onSaveChat={saveChat} currentChatData={getCurrentChatData()} setClickableChats={setClickableChats}  />
+                        <ChatDisplay userInput={submittedInput} onSaveChat={saveChat} currentChatData={getCurrentChatData()} setClickableChats={setClickableChats} showAlert={inputAlert}  />
                         {inputField && (
                             <div className="flex justify-center w-full mb-5">
                                 <form onSubmit={handleUserInput} className="flex border-2 border-red-400 gap-2 rounded-3xl p-3 items-center">
