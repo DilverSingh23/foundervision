@@ -28,7 +28,7 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData, setClickableChats
             setShow(true)
         }
         else {
-            setCanvasData(null)
+            setCanvasData("")
             setShow(false)
             setError("")
         }
@@ -38,7 +38,7 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData, setClickableChats
     useEffect(() => {
         setViewing(false)
         if (!currentChatData && userInput.length > 0) {
-            setCanvasData("")
+            setCanvasData(null)
             setTimeout(() => {
                 setShow(true)
                 generateCanvas(userInput)
@@ -116,7 +116,7 @@ const chatdisplay = ({ userInput, onSaveChat, currentChatData, setClickableChats
 
 
     return (
-        <div className="flex flex-col w-250 h-11/12 self-center overflow-auto mt-5 scroll-behavior-smooth scrollbar-gutter-stable p-10 pt-0 overflow-x-scroll gap-10 max-[950px]:w-180 max-[665px]:w-120 max-[450px]:w-110 max-[450px]:pl-8">
+        <div className="flex flex-col w-250 min-h-0 flex-1 self-center overflow-auto mt-5 scroll-behavior-smooth scrollbar-gutter-stable p-10 pt-0 overflow-x-scroll gap-10 max-[950px]:w-180 max-[665px]:w-120 max-[450px]:w-110 max-[450px]:pl-8">
             <AiMessage output = {startMessage} first={true} />
             {showAlert && (
                 <AiMessage output="You can't submit an empty idea!" first={false} />
